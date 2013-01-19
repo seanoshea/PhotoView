@@ -34,7 +34,7 @@ import android.widget.ImageView.ScaleType;
 public class PhotoViewAttacher implements View.OnTouchListener, VersionedGestureDetector.OnGestureListener,
 		GestureDetector.OnDoubleTapListener, ViewTreeObserver.OnGlobalLayoutListener {
 
-	static final boolean DEBUG = true;
+	static final boolean DEBUG = false;
 	static final String LOG_TAG = "PhotoViewAttacher";
 
 	static final int EDGE_NONE = -1;
@@ -190,8 +190,9 @@ public class PhotoViewAttacher implements View.OnTouchListener, VersionedGesture
 		// If we don't have an ImageView, call cleanup()
 		if (null == imageView) {
 			cleanup();
-			throw new IllegalStateException(
-					"ImageView no longer exists. You should not use this PhotoViewAttacher any more.");
+	        if (DEBUG) {
+	            Log.d(LOG_TAG, "will return null from getImageView");
+	        }
 		}
 
 		return imageView;
